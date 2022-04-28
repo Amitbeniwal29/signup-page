@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .b {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .top {
+        text-align: center;
+        font-size: xx-large;
+        padding-top: 20vh;
+        padding-bottom: 20px;
+        font-weight: 900;
+    }
+
+    .left {
+        height: 100vh;
+        width: 50vw;
+        background-color: rgb(247, 65, 65);
+    }
+
+    .right {
+        height: 100vh;
+        width: 50vw;
+        background-color: whitesmoke;
+    }
+
+    .wel {
+        text-align: center;
+        font-size: 400%;
+        padding-top: 40vh;
+        padding-bottom: 10px;
+        color: white;
+    }
+
+    .wel2 {
+        text-align: center;
+        color: white;
+        font-size: x-large;
+    }
+
+    .name {
+        padding-bottom: 10px;
+        padding-left: 40px;
+        font-size: x-large;
+    }
+
+    .mail {
+        padding-left: 40px;
+        font-size: x-large;
+    }
+
+    .pass {
+        padding-left: 40px;
+        font-size: x-large;
+        padding-top: 10px;
+    }
+
+    .submit {
+        text-align: center;
+        padding-top: 30px;
+    }
+    
+    .sub {
+        width: 100px;
+        height: 30px;
+        border-radius: 30%;
+        background-color: red;
+        color: white;
+        cursor: pointer;
+    }
+    .sub:hover{
+        background-color: blue;
+    }
+
+    .nameinput {
+        width: 20vw;
+        height: 20px;
+    }
+
+    .mailinput {
+        width: 20vw;
+        height: 20px;
+    }
+
+    .passinput {
+        width: 20vw;
+        height: 20px;
+    }
+
+    .nameerror {
+        color: red;
+    }
+</style>
+
+<body>
+    <div class="b">
+        <div class="left">
+            <div class="wel">Welcome Back!</div>
+            <div class="wel2">To keep connected with us please login with your personal information</div>
+        </div>
+        <div class="right">
+            <form action="/myaction.php" name="myForm" onsubmit="return validateForm()" method="get">
+                <div class="top">Login or create an account</div>
+                <div class="name" id="name">Name: <input class="nameinput" type="text" name="fname"
+                        placeholder="Enter Your Name" required><span class="formerror"><b></b></span></div>
+                <div class="mail" id="email">Email: <input class="mailinput" type="email" name="femail"
+                        placeholder="Enter Your Mail" required>
+                    <span class="formerror"><b></b></span>
+                </div>
+                <div class="pass" id="pass">Password: <input class="passinput" type="password" name="fpass"
+                        placeholder="Enter Your Password" required>
+                    <span class="formerror"><b></b></span>
+                </div>
+                <div class="pass" id="cpass">Confirm Password: <input class="passinput" type="password" name="fcpass"
+                        placeholder="Re-Enter Your Password" required>
+                    <span class="formerror"><b></b></span>
+                </div>
+                <div class="submit"><input type="submit" class="sub" required></div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    function clearErrors() {
+
+        errors = document.getElementsByClassName('formerror');
+        for (let item of errors) {
+            item.innerHTML = "";
+        }
+        function seterror(id, error) {
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+
+        }
+        function validateForm() {
+            var returnval = true;
+            clearErrors();
+            var name = document.forms['myForm']["fname"].value;
+            if (name.length < 5) {
+                seterror("name", "*Length of name is too short");
+                returnval = false;
+            }
+            var password = document.forms['myForm']["fpass"].value;
+            if (password.length < 6) {
+                seterror("pass", "*Password must be atleast 6 characters long!");
+                returnval = false;
+            }
+
+            var cpassword = document.forms['myForm']["fcpass"].value;
+            if (cpassword != password) {
+                seterror("cpass", "*Password and Confirm password should match!");
+                returnval = false;
+            }
+            return returnval;
+        }
+</script>
+
+</html>
